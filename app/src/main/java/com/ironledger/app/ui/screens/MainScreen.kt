@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.filled.Nightlight
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -37,6 +38,7 @@ val bottomNavItems = listOf(
     BottomNavItem(Destinations.PERSONAL_STREAK, "Streak", Icons.Default.Whatshot),
     BottomNavItem(Destinations.AI_COACH, "AI", Icons.Default.SmartToy)
 )
+
 @Composable
 fun MainScreen() {
     val navController = rememberNavController()
@@ -125,7 +127,9 @@ fun MainScreen() {
                 beyondViewportPageCount = 1
             ) { page ->
                 when (pagerRoutes[page]) {
-                    Destinations.DASHBOARD -> DashboardScreen()
+                    Destinations.DASHBOARD -> DashboardScreen(onNavigateToSleep = {
+                        navController.navigate(Destinations.SLEEP_LOG)
+                    })
                     Destinations.FOOD_LOG -> FoodLogScreen()
                     Destinations.WORKOUT_LOG -> WorkoutLogScreen()
                     Destinations.WEIGHT_LOG -> WeightLogScreen()

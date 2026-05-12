@@ -118,6 +118,14 @@ object Calculations {
     }
 
     /**
+     * Overload for timestamp-based duration calculation (Senior+ pattern).
+     */
+    fun calculateSleepDuration(bedtimeMillis: Long, wakeTimeMillis: Long): Float {
+        val diffMillis = wakeTimeMillis - bedtimeMillis
+        return if (diffMillis <= 0) 0f else diffMillis / (1000 * 60 * 60f)
+    }
+
+    /**
      * Sleep quality based on duration.
      * 7-9h: Great (green), 5-7h: Fair (yellow), <5h or >10h: Poor (red)
      */

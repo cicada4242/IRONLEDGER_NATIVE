@@ -19,7 +19,11 @@ fun IronLedgerNavHost(
         modifier = modifier
     ) {
         composable(Destinations.ONBOARDING) { OnboardingScreen() }
-        composable(Destinations.DASHBOARD) { DashboardScreen() }
+        composable(Destinations.DASHBOARD) { 
+            DashboardScreen(onNavigateToSleep = {
+                navController.navigate(Destinations.SLEEP_LOG)
+            }) 
+        }
         composable(Destinations.FOOD_LOG) { FoodLogScreen() }
         composable(Destinations.WORKOUT_LOG) { WorkoutLogScreen() }
         composable(Destinations.PHOTOS) { PhotosScreen() }

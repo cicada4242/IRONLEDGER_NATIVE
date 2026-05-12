@@ -8,9 +8,16 @@ import androidx.sqlite.db.SupportSQLiteDatabase
  */
 val MIGRATION_1_2 = object : Migration(1, 2) {
     override fun migrate(database: SupportSQLiteDatabase) {
-        // Add new columns to sleepLogs
-        database.execSQL("ALTER TABLE sleepLogs ADD COLUMN bedtime TEXT NOT NULL DEFAULT ''")
-        database.execSQL("ALTER TABLE sleepLogs ADD COLUMN wakeTime TEXT NOT NULL DEFAULT ''")
-        database.execSQL("ALTER TABLE sleepLogs ADD COLUMN note TEXT NOT NULL DEFAULT ''")
+        // Drop old sleepLogs table to fix schema (derived columns removal)
+        database.execSQL("DROP TABLE IF EXISTS sleepLogs")
+        database.execSQL("""
+            CREATE TABLE sleepLogs (
+                id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                date TEXT NOT NULL,
+                bedtime INTEGER NOT NULL,
+                wakeTime INTEGER NOT NULL,
+                note TEXT NOT NULL DEFAULT ''
+            )
+        """.trimIndent())
     }
 }

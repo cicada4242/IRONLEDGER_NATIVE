@@ -99,11 +99,9 @@ data class WeightLogEntity(
 @Entity(tableName = "sleepLogs")
 data class SleepLogEntity(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    val date: String,
-    val durationHours: Float,
-    val quality: String,
-    val bedtime: String = "",
-    val wakeTime: String = "",
+    val date: String,       // Wake date, ISO format (YYYY-MM-DD)
+    val bedtime: Long,      // Epoch Millis
+    val wakeTime: Long,     // Epoch Millis
     val note: String = ""
 )
 

@@ -7,6 +7,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FitnessCenter
 import androidx.compose.material.icons.filled.Whatshot
+import androidx.compose.material.icons.filled.Nightlight
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -29,6 +30,7 @@ import com.ironledger.app.ui.theme.*
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DashboardScreen(
+    onNavigateToSleep: () -> Unit,
     viewModel: DashboardViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -188,6 +190,43 @@ fun DashboardScreen(
                                     }
                                 }
                             }
+                        }
+                    }
+                }
+
+                // Sleep Card
+                Surface(
+                    onClick = onNavigateToSleep,
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = androidx.compose.foundation.shape.RoundedCornerShape(24.dp),
+                    color = Dark700.copy(alpha = 0.5f),
+                    border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF2DD4BF).copy(alpha = 0.3f))
+                ) {
+                    Row(
+                        modifier = Modifier.padding(24.dp),
+                        verticalAlignment = androidx.compose.ui.Alignment.CenterVertically
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .size(56.dp)
+                                .background(
+                                    Brush.radialGradient(listOf(Color(0xFF2DD4BF), Color.Transparent)),
+                                    androidx.compose.foundation.shape.CircleShape
+                                ),
+                            contentAlignment = androidx.compose.ui.Alignment.Center
+                        ) {
+                            Icon(
+                                androidx.compose.material.icons.Icons.Default.Nightlight,
+                                contentDescription = null,
+                                tint = Color.White,
+                                modifier = Modifier.size(32.dp)
+                            )
+                        }
+                        Spacer(modifier = Modifier.width(20.dp))
+                        Column {
+                            Text("RECOVERY", style = MaterialTheme.typography.labelSmall, color = Color(0xFF2DD4BF), fontWeight = FontWeight.Black)
+                            Text("Sleep Log", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                            Text("Check your recovery stats", style = MaterialTheme.typography.bodySmall, color = Color.White.copy(alpha = 0.6f))
                         }
                     }
                 }
