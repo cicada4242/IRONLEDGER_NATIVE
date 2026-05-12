@@ -144,3 +144,13 @@
 1. Implement Sleep Log (Phase 2.2) — needs entity migration.
 2. Refactor `WeightLogScreen.kt` to use `IronLedgerComponents.kt`.
 3. Port Profile/Settings logic to use `Calculations.kt`.
+### **2026-05-12 17:40 - Phase 2.2: Sleep Log Implementation (Senior+)**
+- **Architecture:** Upgraded to **Timestamp-based storage** (Epoch Long) for bedtime and wakeTime. This handles date boundaries and timezone math natively.
+- **UX:** Implemented the **Material 3 Clock Dial** time picker for a premium, gesture-based interaction.
+- **Logic:**
+  - Used **Wake Date** as the source of truth for record categorization (industry standard).
+  - Implemented **Derived State** pattern: Duration and Quality are calculated in the ViewModel, never stored.
+  - Handled "Overnight" logic: Automatically subtracts 24 hours from bedtime if it's after wakeTime.
+- **UI:** Added **Recovery (Sleep Log)** card to Dashboard with Teal accents.
+- **Build:** Verified with clean `./gradlew clean assembleDebug`.
+- **Git:** Pushed to `master`.
