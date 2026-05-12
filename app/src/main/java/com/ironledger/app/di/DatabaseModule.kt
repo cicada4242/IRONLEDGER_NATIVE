@@ -3,6 +3,7 @@ package com.ironledger.app.di
 import android.app.Application
 import androidx.room.Room
 import com.ironledger.app.data.local.IronLedgerDatabase
+import com.ironledger.app.data.local.MIGRATION_1_2
 import com.ironledger.app.data.local.dao.IronLedgerDao
 import dagger.Module
 import dagger.Provides
@@ -21,7 +22,8 @@ object DatabaseModule {
             app,
             IronLedgerDatabase::class.java,
             IronLedgerDatabase.DATABASE_NAME
-        ).build()
+        ).addMigrations(MIGRATION_1_2)
+            .build()
     }
 
     @Provides

@@ -101,7 +101,10 @@ data class SleepLogEntity(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val date: String,
     val durationHours: Float,
-    val quality: String
+    val quality: String,
+    val bedtime: String = "",
+    val wakeTime: String = "",
+    val note: String = ""
 )
 
 @Entity(tableName = "measurementLogs")

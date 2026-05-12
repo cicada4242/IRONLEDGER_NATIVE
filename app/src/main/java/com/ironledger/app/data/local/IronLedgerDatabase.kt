@@ -21,7 +21,7 @@ import com.ironledger.app.data.local.entity.*
         HabitTrackerEntity::class,
         SettingEntity::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 @TypeConverters(Converters::class)

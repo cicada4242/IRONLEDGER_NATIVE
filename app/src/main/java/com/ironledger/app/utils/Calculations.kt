@@ -143,4 +143,19 @@ object Calculations {
         val subset = values.takeLast(window)
         return subset.sum() / subset.size
     }
+
+    /**
+     * Returns the daily rate of change via least-squares linear regression.
+     * Multiply by 7 to get kg/week.
+     * Needs at least 2 data points; returns 0f otherwise.
+     */
+    fun calculateLinearSlope(values: List<Float>): Float {
+        if (values.size < 2) return 0f
+        val n = values.size
+        val xMean = (n - 1) / 2f
+        val yMean = values.average().toFloat()
+        val numerator = values.mapIndexed { i, y -> (i - xMean) * (y - yMean) }.sum()
+        val denominator = values.indices.map { i -> (i - xMean) * (i - xMean) }.sum()
+        return if (denominator == 0f) 0f else numerator / denominator
+    }
 }
